@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>delete Cruise</title>
+</head>
+<body>
+<div>
+    <h2 th:text="'Czy na pewno usunąć rejs: ' + ${name}">Czy na pewno usunąć rejs zielony</h2>
+    <a href="#" th:href="@{/cruises/delete(id=${id})}">Tak</a>
+    <a href="#" th:href="@{/cruises}">Nie</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>navbar</title>
+</head>
+<body>
+<div th:fragment="admin">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Milomierz Kanona</a>
+        <button aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarTogglerDemo02" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="../cruise/list.html" th:href="@{/cruises}">Rejsy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Klienci</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">Milomierz</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">Archiwum</a>
+                </li>
+            </ul>
+            <a class="my-2 my-sm-0" href="#">Wyloguj</a>
+
+
+            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle " data-toggle="dropdown"
+               href="#" id="navbarDropdownMenuLink">
+                Witaj użytkowniku
+            </a>
+            <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+                <a class="dropdown-item" href="#">Edydtuj profil</a>
+                <a class="dropdown-item" href="#">Dodaj użytkownika</a>
+                <a class="dropdown-item" href="#">Wyloguj</a>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
