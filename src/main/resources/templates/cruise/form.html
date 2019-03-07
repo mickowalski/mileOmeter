@@ -8,12 +8,11 @@
 <body>
 <div th:include="/fragments/navbar::admin"></div>
 <div class="d-inline-flex p-2 bd-highlight">
-    <form action="#" class="form-general" method="post" th:action="cruises" th:object="${cruise}">
+    <form action="#" class="form-general" method="post" th:action="@{/cruises}" th:object="${cruise}">
         <input th:field="*{id}" th:value="*{id}" type="hidden"/>
         <div class="form-group">
             <label>Nazwa rejsu</label><br>
-            <input class="form-control" placeholder="Nazwa rejsu" th:field="*{name}" type="text"
-                   value="Norwegia 2012"/><br>
+            <input class="form-control" placeholder="Nazwa rejsu" th:field="*{name}" type="text"/><br>
             <small class="form-text text-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Błędy
                 nazwy
             </small>
@@ -47,7 +46,8 @@
                 ilości użtkowników
             </small>
         </div>
-        <button class="btn btn-primary" type="submit">Zapisz</button>
+        <button class="btn btn-primary" type="submit">Zapisz</button> &nbsp;
+        <a class="btn btn-primary" href="#" th:href="@{/cruises}">Anuluj</a>
     </form>
 </div>
 <div th:include="/fragments/bootstrap::body"></div>

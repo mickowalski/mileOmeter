@@ -32,7 +32,7 @@
         <td th:text="${cr.yachtDesc}">bavarai 49</td>
         <td>
             <a class="btn btn-primary" href="#" th:href="@{/cruises(id=${cr.id})}">Edytuj</a>
-            <a class="btn btn-primary" href="#">Szczegóły</a>
+            <a class="btn btn-primary" href="#" th:href="@{/cruises/{cruiseId}(cruiseId=${cr.id})}">Szczegóły</a>
             <a class="btn btn-primary" href="#"
                th:href="@{/cruises/confirmDelete(id=${cr.id}, name=${cr.name})}">Usuń</a>
             <a class="btn btn-primary" href="#">Archiwizuj</a>

@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "cruises")
@@ -35,12 +36,23 @@ public class Cruise {
     @Column(name = "yacht_desc")
     private String YachtDesc;
 
+    @OneToMany(mappedBy = "cruise", cascade = CascadeType.REMOVE)
+    private List<Details> details;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Details> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<Details> details) {
+        this.details = details;
     }
 
     public String getName() {

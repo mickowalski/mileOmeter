@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>delete Details</title>
+</head>
+<body>
+<div>
+    <h2>Czy na pewno usunąć?</h2>
+    <a href="#" th:href="@{/cruises/{cruiseId}/delete(id=${id}, cruiseId=${cruiseId})}">Tak</a>
+    <a href="#" th:href="@{/cruises/{cruiseId}(cruiseId=${cruiseId})}">Nie</a>
+</div>
+
+</body>
+</html>

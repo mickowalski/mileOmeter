@@ -3,6 +3,7 @@ package com.briskscript.mileometer.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -27,6 +28,17 @@ public class Customer {
     private String email;
     private String phone;
     private String shirt;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Details> details;
+
+    public List<Details> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<Details> details) {
+        this.details = details;
+    }
 
     public Long getId() {
         return id;

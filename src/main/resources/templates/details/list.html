@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:include="/fragments/bootstrap::header"></div>
+    <title>Details</title>
+</head>
+<body>
+<div th:include="/fragments/navbar::admin"></div>
+<p class="h1 text-center" style="font-family: 'Tajawal', sans-serif;" th:text="'Rejs: '+${cruise.name}">Rejs: Norwegia
+    2012</p>
+
+<p class="h5 text-left" style="color: whitesmoke" th:text="'Liczba osób: '+${count}+'/'+${cruise.maxPpl}">Ilość osób:
+    3/10</p>
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Uczestnik</th>
+        <th>Zapłacono</th>
+        <th>Ilość rat</th>
+        <th>Ilość mil</th>
+        <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first">
+    <tr th:each="dt,iterStat : ${detailsList}">
+        <td th:text="${iterStat.count}">1</td>
+        <td th:text="${dt.customer.fullName}">Piotr Osiak</td>
+        <td th:text="${dt.paid} +'/'+ ${dt.price}">1100/2200</td>
+        <td th:text="${dt.instalment} +'/'+ ${dt.instalments}">1/2</td>
+        <td th:text="${dt.miles}">250</td>
+        <td>
+            <a class="btn btn-primary" href="#" th:href="@{/cruises/{cruiseId}(id=${dt.id}, cruiseId=${cruise.id})}">Edytuj</a>
+            <a class="btn btn-primary" href="#"
+               th:href="@{/cruises/{cruiseId}/confirmDelete(id=${dt.id}, cruiseId=${cruise.id})}">Usuń</a>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Emilia Szczepańska</td>
+        <td>1100/2200</td>
+        <td>1/2</td>
+        <td>250</td>
+        <td>
+            <a class="btn btn-primary" href="#">Edytuj</a>
+            <a class="btn btn-primary" href="#">Usuń</a>
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Emilia Jóźwiak</td>
+        <td>0/2200</td>
+        <td>0/2</td>
+        <td>250</td>
+        <td>
+            <a class="btn btn-primary" href="#">Edytuj</a>
+            <a class="btn btn-primary" href="#">Usuń</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary" href="form.html" th:href="@{/cruises/{cruiseId}(id=-1, cruiseId=${cruise.id})}">Dodaj</a>
+</p>
+<div th:include="/fragments/bootstrap::body"></div>
+</body>
+</html>
