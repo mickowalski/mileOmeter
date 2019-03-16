@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
             <label>Maksymalna ilość uczestników</label>
-            <input class="form-control" placeholder="Maksymalna ilość uczestników" th:field="*{maxPpl}" type="number"/>
+            <input class="form-control" placeholder="Maksymalna ilość uczestników" th:field="*{maxPpl}" type="text"/>
             <small class="form-text text-danger" th:errors="*{maxPpl}" th:if="${#fields.hasErrors('maxPpl')}">Błedy
                 ilości użtkowników
             </small>

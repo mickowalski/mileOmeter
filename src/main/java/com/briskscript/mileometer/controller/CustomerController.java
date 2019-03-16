@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
 
+    final private CustomerRepository customerRepository;
+
     @Autowired
-    CustomerRepository customerRepository;
+    public CustomerController(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @ModelAttribute("customers")
     public List<Customer> customersList() {
@@ -30,7 +35,11 @@ public class CustomerController {
         if (id == null) {
             return "customer/list";
         }
-        Customer customer = id == -1L ? new Customer() : customerRepository.getOne(id);
+        Customer customer = new Customer();
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        if (optionalCustomer.isPresent()) {
+            customer = optionalCustomer.get();
+        }
         model.addAttribute("customer", customer);
         return "customer/form";
     }
@@ -59,6 +68,6 @@ public class CustomerController {
     @GetMapping("/delete")
     public String deleteCustomer(@RequestParam Long id) {
         customerRepository.deleteById(id);
-        return "redirect:/cruises";
+        return "redirect:/customers";
     }
 }

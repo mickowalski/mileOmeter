@@ -20,14 +20,18 @@ import java.util.Optional;
 @RequestMapping("cruises/{cruiseId}")
 public class DetailsController {
 
-    @Autowired
-    DetailsRepository detailsRepository;
+    final private DetailsRepository detailsRepository;
+
+    final private CruiseRepository cruiseRepository;
+
+    final private CustomerRepository customerRepository;
 
     @Autowired
-    CruiseRepository cruiseRepository;
-
-    @Autowired
-    CustomerRepository customerRepository;
+    public DetailsController(DetailsRepository detailsRepository, CruiseRepository cruiseRepository, CustomerRepository customerRepository) {
+        this.detailsRepository = detailsRepository;
+        this.cruiseRepository = cruiseRepository;
+        this.customerRepository = customerRepository;
+    }
 
     @GetMapping("")
     public String detailsList(@PathVariable(value = "cruiseId") Long cruiseId, @RequestParam(required = false) Long id, Model model) {
@@ -42,11 +46,11 @@ public class DetailsController {
             model.addAttribute("count", detailsRepository.countAllByCruise(cruise.get()));
             return "details/list";
         }
+        Details details = new Details();
         Optional<Details> optionalDetails = detailsRepository.findById(id);
-        if (!optionalDetails.isPresent()) {
-            return "redirect:/cruises/" + cruiseId;
+        if (optionalDetails.isPresent()) {
+            details = optionalDetails.get();
         }
-        Details details = id == -1L ? new Details() : optionalDetails.get();
         details.setCruise(cruise.get());
         model.addAttribute("detail", details);
         model.addAttribute("customers", customerRepository.findAll(new Sort(Sort.Direction.ASC, "lastName")));

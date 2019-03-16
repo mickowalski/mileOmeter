@@ -34,10 +34,18 @@ public class Cruise {
     @Column(name = "yacht_name")
     private String yachtName;
     @Column(name = "yacht_desc")
-    private String YachtDesc;
+    private String yachtDesc;
+    private Boolean archive;
 
     @OneToMany(mappedBy = "cruise", cascade = CascadeType.REMOVE)
     private List<Details> details;
+
+    public Cruise() {
+        this.maxPpl = 10;
+        this.yachtName = "BEE WET";
+        this.yachtDesc = "Bavaria 49";
+        this.archive = false;
+    }
 
     public Long getId() {
         return id;
@@ -96,10 +104,18 @@ public class Cruise {
     }
 
     public String getYachtDesc() {
-        return YachtDesc;
+        return yachtDesc;
     }
 
     public void setYachtDesc(String yachtDesc) {
-        YachtDesc = yachtDesc;
+        this.yachtDesc = yachtDesc;
+    }
+
+    public Boolean getArchive() {
+        return archive;
+    }
+
+    public void setArchive(Boolean archive) {
+        this.archive = archive;
     }
 }

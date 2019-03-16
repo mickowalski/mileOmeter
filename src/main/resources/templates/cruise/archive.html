@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <div th:include="/fragments/bootstrap::header"></div>
-    <title>Cruises</title>
+    <title>Archive</title>
 </head>
 <body>
 <div th:include="/fragments/navbar::admin"></div>
-<p class="h1 text-center" style="font-family: 'Tajawal', sans-serif;"><i class="icon ion-ios-boat"></i>Rejsy</p>
+<p class="h1 text-center" style="font-family: 'Tajawal', sans-serif;"><i class="icon ion-ios-boat"></i>Archiwum</p>
 
 
 <table class="table table-striped table-dark">
@@ -23,19 +23,18 @@
     </tr>
     </thead>
     <tbody th:remove="all-but-first">
-    <tr th:each="cr,iterStat : ${cruises}">
+    <tr th:each="cruise,iterStat : ${archive}">
         <td th:text="${iterStat.count}">1</td>
-        <td th:text="${cr.name}">Norwegia 2012</td>
-        <td th:text="${cr.start}">20 stycznia 2012</td>
-        <td th:text="${cr.end}">30 stycznia 2012</td>
-        <td th:text="${cr.yachtName}">WET BEE</td>
-        <td th:text="${cr.yachtDesc}">bavarai 49</td>
+        <td th:text="${cruise.name}">Norwegia 2012</td>
+        <td th:text="${cruise.start}">20 stycznia 2012</td>
+        <td th:text="${cruise.end}">30 stycznia 2012</td>
+        <td th:text="${cruise.yachtName}">WET BEE</td>
+        <td th:text="${cruise.yachtDesc}">bavaria 49</td>
         <td>
-            <a class="btn btn-primary" href="#" th:href="@{/cruises(id=${cr.id})}">Edytuj</a>
-            <a class="btn btn-primary" href="#" th:href="@{/cruises/{cruiseId}(cruiseId=${cr.id})}">Szczegóły</a>
+            <a class="btn btn-primary" href="#" th:href="@{/cruises(id=${cruise.id})}">Edytuj</a>
+            <a class="btn btn-primary" href="#" th:href="@{/cruises/{cruiseId}(cruiseId=${cruise.id})}">Szczegóły</a>
             <a class="btn btn-primary" href="#"
-               th:href="@{/cruises/confirmDelete(id=${cr.id}, name=${cr.name})}">Usuń</a>
-            <a class="btn btn-primary" href="#" th:href="@{/cruises/toArchive(id=${cr.id})}">Archiwizuj</a>
+               th:href="@{/cruises/confirmDelete(id=${cruise.id}, name=${cruise.name})}">Usuń</a>
         </td>
     </tr>
     <tr>

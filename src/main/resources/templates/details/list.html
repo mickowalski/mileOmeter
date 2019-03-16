@@ -20,7 +20,7 @@
         <th>Zapłacono</th>
         <th>Ilość rat</th>
         <th>Ilość mil</th>
-        <th>Akcje</th>
+        <th th:if="${not cruise.archive}">Akcje</th>
     </tr>
     </thead>
     <tbody th:remove="all-but-first">
@@ -30,8 +30,9 @@
         <td th:text="${dt.paid} +'/'+ ${dt.price}">1100/2200</td>
         <td th:text="${dt.instalment} +'/'+ ${dt.instalments}">1/2</td>
         <td th:text="${dt.miles}">250</td>
-        <td>
-            <a class="btn btn-primary" href="#" th:href="@{/cruises/{cruiseId}(id=${dt.id}, cruiseId=${cruise.id})}">Edytuj</a>
+        <td th:if="${not cruise.archive}">
+            <a class="btn btn-primary" href="#"
+               th:href="@{/cruises/{cruiseId}(id=${dt.id}, cruiseId=${cruise.id})}">Edytuj</a>
             <a class="btn btn-primary" href="#"
                th:href="@{/cruises/{cruiseId}/confirmDelete(id=${dt.id}, cruiseId=${cruise.id})}">Usuń</a>
         </td>
@@ -61,7 +62,9 @@
     </tbody>
 </table>
 <p>
-    <a class="btn btn-primary" href="form.html" th:href="@{/cruises/{cruiseId}(id=-1, cruiseId=${cruise.id})}">Dodaj</a>
+    <a class="btn btn-primary" href="form.html" th:href="@{/cruises/{cruiseId}(id=-1, cruiseId=${cruise.id})}"
+       th:if="${not cruise.archive}">Dodaj</a> &nbsp;
+    <a class="btn btn-primary" href="#" th:href="${cruise.archive}? @{/cruises/archive} : @{/cruises}">Powrót</a>
 </p>
 <div th:include="/fragments/bootstrap::body"></div>
 </body>

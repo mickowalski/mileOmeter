@@ -3,7 +3,6 @@ package com.briskscript.mileometer.controller;
 import com.briskscript.mileometer.entity.Cruise;
 import com.briskscript.mileometer.repository.CruiseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,17 +10,42 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cruises")
 public class CruiseController {
 
+    final private CruiseRepository cruiseRepository;
+
     @Autowired
-    CruiseRepository cruiseRepository;
+    public CruiseController(CruiseRepository cruiseRepository) {
+        this.cruiseRepository = cruiseRepository;
+    }
 
     @ModelAttribute("cruises")
     public List<Cruise> crusesList() {
-        return cruiseRepository.findAll(new Sort(Sort.Direction.ASC, "start"));
+        return cruiseRepository.findCruisesByArchiveFalseOrderByStartAsc();
+    }
+
+    @ModelAttribute("archive")
+    public List<Cruise> archiveList() {
+        return cruiseRepository.findCruisesByArchiveTrueOrderByEndDesc();
+    }
+
+    @GetMapping("/archive")
+    public String archive() {
+        return "cruise/archive";
+    }
+
+    @GetMapping("/toArchive")
+    public String toArchive(@RequestParam Long id) {
+        Optional<Cruise> cruise = cruiseRepository.findById(id);
+        if (cruise.isPresent()) {
+            cruise.get().setArchive(true);
+            cruiseRepository.save(cruise.get());
+        }
+        return "redirect:/cruises";
     }
 
     @GetMapping("")
@@ -29,7 +53,12 @@ public class CruiseController {
         if (id == null) {
             return "cruise/list";
         }
-        Cruise cruise = id == -1 ? new Cruise() : cruiseRepository.getOne(id);
+        Cruise cruise = new Cruise();
+        Optional<Cruise> optionalCruise = cruiseRepository.findById(id);
+        if (optionalCruise.isPresent()) {
+            cruise = optionalCruise.get();
+            cruise.setArchive(false);
+        }
         model.addAttribute("cruise", cruise);
         return "cruise/form";
     }
