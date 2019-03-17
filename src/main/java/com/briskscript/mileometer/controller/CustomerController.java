@@ -63,7 +63,7 @@ public class CustomerController {
             return "customer/form";
         }
         customerRepository.save(customer);
-        return "redirect:customers";
+        return "redirect:/customers";
     }
 
     @GetMapping("/customers/confirmDelete")

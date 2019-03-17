@@ -21,6 +21,16 @@ public class User {
     @NotBlank
     @Column(nullable = false)
     private String password;
+    @Transient
+    private String checkPassword;
+
+    public String getCheckPassword() {
+        return checkPassword;
+    }
+
+    public void setCheckPassword(String checkPassword) {
+        this.checkPassword = checkPassword;
+    }
 
     public Long getId() {
         return id;
