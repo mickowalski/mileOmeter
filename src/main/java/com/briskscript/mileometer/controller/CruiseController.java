@@ -57,7 +57,10 @@ public class CruiseController {
         Optional<Cruise> optionalCruise = cruiseRepository.findById(id);
         if (optionalCruise.isPresent()) {
             cruise = optionalCruise.get();
-            cruise.setArchive(false);
+            if (cruise.getArchive()) {
+                cruise.setArchive(false);
+                cruiseRepository.save(cruise);
+            }
         }
         model.addAttribute("cruise", cruise);
         return "cruise/form";

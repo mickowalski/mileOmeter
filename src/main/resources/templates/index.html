@@ -2,15 +2,14 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home page</title>
+    <div th:include="/fragments/bootstrap::header"></div>
+    <title>Mileometer</title>
 </head>
 <body>
-<h1>Milomierz Kanona</h1>
-<div>
-    <a href="cruise/list.html" th:href="@{/cruises}">Rejsy</a><br>
+<div th:include="/fragments/navbar::admin"></div>
+<p class="h1 text-center" style="font-family: 'Tajawal', sans-serif;"><i class="icon ion-ios-speedometer"></i>Milomierz
+    Kanona</p>
 
-</div>
-
-
+<div th:include="/fragments/bootstrap::body"></div>
 </body>
 </html>

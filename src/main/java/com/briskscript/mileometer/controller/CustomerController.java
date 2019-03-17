@@ -2,27 +2,34 @@ package com.briskscript.mileometer.controller;
 
 import com.briskscript.mileometer.entity.Customer;
 import com.briskscript.mileometer.repository.CustomerRepository;
+import com.briskscript.mileometer.repository.DetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/customers")
 public class CustomerController {
 
     final private CustomerRepository customerRepository;
 
+    final private DetailsRepository detailsRepository;
+
     @Autowired
-    public CustomerController(CustomerRepository customerRepository) {
+    public CustomerController(CustomerRepository customerRepository, DetailsRepository detailsRepository) {
         this.customerRepository = customerRepository;
+        this.detailsRepository = detailsRepository;
     }
 
     @ModelAttribute("customers")
@@ -30,7 +37,8 @@ public class CustomerController {
         return customerRepository.findAll(new Sort(Sort.Direction.ASC, "lastName"));
     }
 
-    @GetMapping("")
+    //    Customer
+    @GetMapping("/customers")
     public String customersMain(@RequestParam(required = false) Long id, Model model) {
         if (id == null) {
             return "customer/list";
@@ -44,7 +52,7 @@ public class CustomerController {
         return "customer/form";
     }
 
-    @PostMapping("")
+    @PostMapping("/customers")
     public String SaveOrUpdateCustomer(@Valid Customer customer, BindingResult result) {
         Customer existingCustomer = customerRepository.findFirstByEmail(customer.getEmail());
         if (existingCustomer != null && customer.getId() == null) {
@@ -58,16 +66,24 @@ public class CustomerController {
         return "redirect:customers";
     }
 
-    @GetMapping("/confirmDelete")
+    @GetMapping("/customers/confirmDelete")
     public String confirmDeletion(@RequestParam Long id, @RequestParam String name, Model model) {
         model.addAttribute("id", id);
         model.addAttribute("name", name);
         return "customer/delete";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/customers/delete")
     public String deleteCustomer(@RequestParam Long id) {
         customerRepository.deleteById(id);
         return "redirect:/customers";
+    }
+
+    //    Mileometer
+    @GetMapping("/mileometer")
+    public String mileometer(Model model) {
+        Date presentDate = new Date();
+        model.addAttribute("mileometer", detailsRepository.dataForMileometer(presentDate));
+        return "customer/mileometer";
     }
 }
