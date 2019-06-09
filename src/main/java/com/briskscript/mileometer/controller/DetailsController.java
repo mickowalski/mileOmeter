@@ -1,7 +1,7 @@
 package com.briskscript.mileometer.controller;
 
-import com.briskscript.mileometer.entity.Cruise;
-import com.briskscript.mileometer.entity.Details;
+import com.briskscript.mileometer.model.Cruise;
+import com.briskscript.mileometer.model.Details;
 import com.briskscript.mileometer.repository.CruiseRepository;
 import com.briskscript.mileometer.repository.CustomerRepository;
 import com.briskscript.mileometer.repository.DetailsRepository;

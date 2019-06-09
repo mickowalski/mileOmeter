@@ -12,17 +12,10 @@
         <input th:field="*{id}" th:value="*{id}" type="hidden"/>
         <div class="form-group">
             <label>Nick</label><br>
-            <input class="form-control" placeholder="Nick" th:field="*{nick}" type="text"
+            <input class="form-control" placeholder="Nazwa użytkownika" th:field="*{userName}" type="text"
                    value="Zbyszek"/><br>
-            <small class="form-text text-danger" th:errors="*{nick}" th:if="${#fields.hasErrors('nick')}">
+            <small class="form-text text-danger" th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}">
                 Błędy nick
-            </small>
-        </div>
-        <div class="form-group">
-            <label>Email</label><br>
-            <input class="form-control" placeholder="Email" th:field="*{email}" type="text"/><br>
-            <small class="form-text text-danger" th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Błędy
-                email
             </small>
         </div>
         <div class="form-group">
@@ -34,7 +27,7 @@
         </small>
         <div class="form-group">
             <label>Powtórz hasło</label><br>
-            <input class="form-control" th:field="*{checkPassword}" type="password"/>
+            <input class="form-control" th:field="*{confirmPassword}" type="password"/>
         </div>
         <button class="btn btn-primary" type="submit">Zapisz</button> &nbsp;
         <a class="btn btn-primary" href="#" th:href="@{/customers}">Anuluj</a>

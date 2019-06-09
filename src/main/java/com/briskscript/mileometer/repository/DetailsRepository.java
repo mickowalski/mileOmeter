@@ -1,7 +1,7 @@
 package com.briskscript.mileometer.repository;
 
-import com.briskscript.mileometer.entity.Cruise;
-import com.briskscript.mileometer.entity.Details;
+import com.briskscript.mileometer.model.Cruise;
+import com.briskscript.mileometer.model.Details;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

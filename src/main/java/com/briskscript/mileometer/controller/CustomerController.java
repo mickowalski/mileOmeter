@@ -1,6 +1,6 @@
 package com.briskscript.mileometer.controller;
 
-import com.briskscript.mileometer.entity.Customer;
+import com.briskscript.mileometer.model.Customer;
 import com.briskscript.mileometer.repository.CustomerRepository;
 import com.briskscript.mileometer.repository.DetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

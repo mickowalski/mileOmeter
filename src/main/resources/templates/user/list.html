@@ -15,19 +15,17 @@
     <tr>
         <th>#</th>
         <th>Nick</th>
-        <th>email</th>
         <th>Akcje</th>
     </tr>
     </thead>
     <tbody th:remove="all-but-first">
     <tr th:each="user,iterStat : ${users}">
         <td th:text="${iterStat.count}">1</td>
-        <td th:text="${user.nick}">Jan</td>
-        <td th:text="${user.email}">Nowak</td>
+        <td th:text="${user.userName}">Jan</td>
         <td>
             <a class="btn btn-primary" href="#" th:href="@{/users(id=${user.id})}">Edytuj</a>
             <a class="btn btn-primary" href="#"
-               th:href="@{/users/confirmDelete(id=${user.id}, nick=${user.nick})}">Usuń</a>
+               th:href="@{/users/confirmDelete(id=${user.id}, nick=${user.userName})}">Usuń</a>
         </td>
     </tr>
     <tr>

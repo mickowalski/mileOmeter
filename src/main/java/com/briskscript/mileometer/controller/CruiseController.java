@@ -1,6 +1,6 @@
 package com.briskscript.mileometer.controller;
 
-import com.briskscript.mileometer.entity.Cruise;
+import com.briskscript.mileometer.model.Cruise;
 import com.briskscript.mileometer.repository.CruiseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
