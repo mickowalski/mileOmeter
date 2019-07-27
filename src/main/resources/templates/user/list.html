@@ -23,9 +23,8 @@
         <td th:text="${iterStat.count}">1</td>
         <td th:text="${user.userName}">Jan</td>
         <td>
-            <a class="btn btn-primary" href="#" th:href="@{/users(id=${user.id})}">Edytuj</a>
             <a class="btn btn-primary" href="#"
-               th:href="@{/users/confirmDelete(id=${user.id}, nick=${user.userName})}">Usuń</a>
+               th:href="@{/users/confirmDelete(id=${user.id}, userName=${user.userName})}">Usuń</a>
         </td>
     </tr>
     <tr>

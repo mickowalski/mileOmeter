@@ -1,10 +1,12 @@
 package com.briskscript.mileometer.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "cruise_details")
 public class Details {

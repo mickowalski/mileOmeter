@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <div th:include="/fragments/bootstrap::header"></div>
     <title>Mileometer</title>
 </head>
 <body>
-<div th:include="/fragments/navbar::admin"></div>
+<div sec:authorize="isAuthenticated()">
+    <!--<div th:include="/fragments/navbar::admin"></div>-->
+</div>
 <p class="h1 text-center" style="font-family: 'Tajawal', sans-serif;"><i class="icon ion-ios-speedometer"></i>Milomierz
     Kanona</p>
 

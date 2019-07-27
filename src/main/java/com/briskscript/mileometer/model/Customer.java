@@ -1,13 +1,15 @@
 package com.briskscript.mileometer.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -34,5 +36,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Details> details;
+
+    public String getFullName() {
+        return firstName + lastName;
+    }
 
 }

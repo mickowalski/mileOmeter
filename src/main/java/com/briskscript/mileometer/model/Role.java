@@ -1,11 +1,13 @@
 package com.briskscript.mileometer.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "roles")
 public class Role {
 
@@ -15,6 +17,8 @@ public class Role {
     @Column(name = "role")
     private String name;
 
+    public Role() {
+    }
     public Role(String name) {
         this.name = name;
     }

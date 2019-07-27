@@ -4,6 +4,8 @@ import com.briskscript.mileometer.DTO.UserRegistrationDto;
 import com.briskscript.mileometer.model.User;
 import com.briskscript.mileometer.repository.UserRepository;
 import com.briskscript.mileometer.service.UserService;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,10 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-//import com.briskscript.mileometer.utils.UserMapper;
 
 @Controller
 public class UserController {
+
 
     private final UserRepository userRepository;
     private final UserService userService;
@@ -47,8 +49,10 @@ public class UserController {
         if (userOptional.isPresent()) {
             user = userOptional.get();
         }
-//        UserRegistrationDto userDto = UserMapper.INSTANCE.userToUserDto(user);
-        model.addAttribute("user", user);
+        Mapper mapper = new DozerBeanMapper();
+        UserRegistrationDto userDto =
+                mapper.map(user, UserRegistrationDto.class);
+        model.addAttribute("user", userDto);
         return "user/form";
     }
 
@@ -69,9 +73,9 @@ public class UserController {
 
 
     @GetMapping("/users/confirmDelete")
-    public String confirmDeletion(@RequestParam Long id, @RequestParam String nick, Model model) {
+    public String confirmDeletion(@RequestParam Long id, @RequestParam String userName, Model model) {
         model.addAttribute("id", id);
-//        model.addAttribute("nick", nick);
+        model.addAttribute("userName", userName);
         return "user/delete";
     }
 

@@ -80,7 +80,7 @@ public class CustomerController {
     }
 
     //    Mileometer
-    @GetMapping("/mileometer")
+    @GetMapping("/")
     public String mileometer(Model model) {
         Date presentDate = new Date();
         model.addAttribute("mileometer", detailsRepository.dataForMileometer(presentDate));
